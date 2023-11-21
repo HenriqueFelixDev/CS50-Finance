@@ -1,0 +1,22 @@
+CREATE TABLE IF NOT EXISTS users (
+	id TEXT NOT NULL,
+	name TEXT NOT NULL,
+	email TEXT UNIQUE NOT NULL,
+	password_hash TEXT NOT NULL,
+	funds DECIMAL NOT NULL DEFAULT 10000,
+	created_at TEXT NOT NULL,
+	PRIMARY KEY(id)
+);
+
+CREATE TABLE IF NOT EXISTS transactions (
+	id TEXT NOT NULL,
+	symbol TEXT NOT NULL,
+	name TEXT NOT NULL,
+	shares INTEGER NOT NULL,
+	price DECIMAL NOT NULL,
+	datetime TEXT NOT NULL,
+	operation TEXT NOT NULL,
+	PRIMARY KEY(id)
+);
+
+CREATE INDEX IF NOT EXISTS email_index ON users(email);
