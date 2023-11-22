@@ -2,12 +2,17 @@
 # Edit at https://www.toptal.com/developers/gitignore?templates=flask,python
 
 *.db
+.env
+.env.local
+.env.dev
+.env.production
 
 ### Flask ###
 instance/*
 !instance/.gitignore
 .webassets-cache
 .env
+flask_session/
 
 ### Flask.Python Stack ###
 # Byte-compiled / optimized / DLL files

@@ -6,12 +6,25 @@
 
 {% block body %}
 
-<form action="/signup" method="POST">
+<form action="/signup" method="POST" class="uk-padding">
   <div class="uk-text-center">
     <h1 class="logo">CS50<span class="logo__trailing">.Finance</span></h1>
     <h2 class="uk-h4">Create an account</h2>
   </div>
 
+  {% with errors = get_flashed_messages(category_filter=['error']) %}
+    {% if errors %}
+      <div class="uk-alert-danger" uk-alert>
+        <ul class="uk-margin-remove uk-list">
+          {% for error in errors %}
+            <li>{{ error }}</li>
+          {% endfor %}
+        </ul>
+        <a href="javascript:void(0);" class="uk-alert-close" uk-close></a>
+      </div>
+    {% endif %}
+  {% endwith %}
+  
   <div class="uk-flex uk-flex-column">
     <label class="uk-margin-small">
       <span class="uk-form-label">Name</span>
@@ -23,7 +36,14 @@
         required
         maxlength="64"
         placeholder="i.e. John"
+        value="{{form.name.data}}"
       />
+
+      {% if 'name' in form.errors %}
+        <small class="uk-text-danger">
+          {{form.errors['name'][0]}}
+        </small>
+      {% endif %}
     </label>
   
     <label class="uk-margin-small">
@@ -36,7 +56,13 @@
         minlength="3"
         maxlength="64"
         placeholder="i.e. john@mail.com"
+        value="{{form.email.data}}"
       />
+      {% if 'email' in form.errors %}
+        <small class="uk-text-danger">
+          {{form.errors['email'][0]}}
+        </small>
+      {% endif %}
     </label>
   
     <label class="uk-margin-small">
@@ -48,6 +74,12 @@
         required
         maxlength="32"
       />
+      
+      {% if 'password' in form.errors %}
+        <small class="uk-text-danger">
+          {{form.errors['password'][0]}}
+        </small>
+      {% endif %}
     </label>
   
     <label class="uk-margin-small">
@@ -59,6 +91,12 @@
         required
         maxlength="32"
       />
+      
+      {% if 'confirm_password' in form.errors %}
+        <small class="uk-text-danger">
+          {{form.errors['confirm_password'][0]}}
+        </small>
+      {% endif %}
     </label>
   
     <input class="uk-button uk-button-primary" type="submit" value="Sign Up" />
