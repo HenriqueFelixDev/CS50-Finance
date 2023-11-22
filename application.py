@@ -1,7 +1,7 @@
 from flask import Flask, request, render_template
 from flask_session import Session
 import core.filters as filters
-from controllers import auth_controller
+from controllers import auth_controller, index_controller
 
 app = Flask(__name__)
 
@@ -18,7 +18,7 @@ Session(app)
 
 @app.route('/', methods=['GET'])
 def index():
-  return render_template('pages/index.html')
+  return index_controller.getIndexPage()
 
 
 @app.route('/signup', methods=['GET', 'POST'])
@@ -27,6 +27,11 @@ def signup():
     return auth_controller.signUp()
   
   return auth_controller.getSignUpPage()
+
+
+@app.route('/sign-out', methods=['POST'])
+def signOut():
+  return auth_controller.signOut()
 
 
 if __name__ == '__main__':

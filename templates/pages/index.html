@@ -3,5 +3,8 @@
 {% block body %}
 
 <h1>Hello, {{ session['name'] }}</h1>
+<form action="/sign-out" method="POST">
+  <button>Sair</button>
+</form>
 
 {% endblock %}
