@@ -22,6 +22,15 @@ def index():
   return index_controller.getIndexPage()
 
 
+@app.route('/sign-in', methods=['GET', 'POST'])
+@decorators.unprotected_route
+def signIn():
+  if request.method == 'POST':
+    return auth_controller.signIn()
+  
+  return auth_controller.getSignInPage()
+
+
 @app.route('/sign-up', methods=['GET', 'POST'])
 @decorators.unprotected_route
 def signup():

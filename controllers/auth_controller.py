@@ -57,6 +57,10 @@ def signUp():
     return getSignUpPage()
 
 
+def signIn():
+  return redirect('/')
+
+
 def signOut():
   '''
   Desloga o usuário do sistema
@@ -84,3 +88,21 @@ def getSignUpPage():
   }
 
   return render_template('pages/signup.html', form=form)
+
+
+def getSignInPage():
+  '''
+  Exibe a tela de login.
+
+  Se qualquer erro ocorrer durante o processo de login do usuário, a 
+  propriedade :attr:`request.form` estará preenchida com os valores digitados 
+  pelo usuário. Esses valores são injetados no template para que os campos 
+  já apareçam preenchidos com os valores digitados anteriormente pelo usuário, 
+  permitindo-o alterá-los sem ter que digitar tudo novamente.
+  '''
+  form = {
+    'email': request.form.get('email'),
+    'password': request.form.get('password'),
+  }
+
+  return render_template('pages/signin.html', form=form)
