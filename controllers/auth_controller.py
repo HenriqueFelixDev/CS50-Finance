@@ -30,7 +30,7 @@ def signUp():
   form = UserCreateValidator(request.form)
 
   if not form.validate():
-    return getSignUpPage()
+    return getSignUpPage(form)
 
   try:
     password_hash = bcrypt.hashpw(
@@ -70,7 +70,12 @@ def signOut():
   return redirect('/sign-in')
 
 
-def getSignUpPage():
+def getSignUpPage(form = {
+  'name': None,
+  'email': None,
+  'password': None,
+  'confirm_password': None,
+}):
   '''
   Exibe a tela de cadastro.
 
@@ -80,17 +85,14 @@ def getSignUpPage():
   já apareçam preenchidos com os valores digitados anteriormente pelo usuário, 
   permitindo-o alterá-los sem ter que digitar tudo novamente.
   '''
-  form = {
-    'name': request.form.get('name'),
-    'email': request.form.get('email'),
-    'password': request.form.get('password'),
-    'confirm_password': request.form.get('confirm_password'),
-  }
 
   return render_template('pages/signup.html', form=form)
 
 
-def getSignInPage():
+def getSignInPage(form = {
+  'email': None,
+  'password': None,
+}):
   '''
   Exibe a tela de login.
 
@@ -100,9 +102,5 @@ def getSignInPage():
   já apareçam preenchidos com os valores digitados anteriormente pelo usuário, 
   permitindo-o alterá-los sem ter que digitar tudo novamente.
   '''
-  form = {
-    'email': request.form.get('email'),
-    'password': request.form.get('password'),
-  }
 
   return render_template('pages/signin.html', form=form)
