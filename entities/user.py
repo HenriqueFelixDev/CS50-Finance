@@ -11,3 +11,9 @@ class UserCreateDTO:
     self.name = name
     self.email = email
     self.password_hash = password_hash
+
+
+class UserSignInDTO:
+  def __init__(self, email, password):
+    self.email = email
+    self.password = password

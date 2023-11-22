@@ -3,7 +3,7 @@ from cuid2 import Cuid
 import bcrypt
 from entities.user import UserCreateDTO
 from repositories.user_repository import createUser
-from core.validators import UserCreateValidator
+from core.validators import UserCreateValidator, UserSignInValidator
 
 def signUp():
   '''
@@ -58,6 +58,11 @@ def signUp():
 
 
 def signIn():
+  form = UserSignInValidator(request.form)
+
+  if not form.validate():
+    return getSignInPage(form)
+  
   return redirect('/')
 
 
