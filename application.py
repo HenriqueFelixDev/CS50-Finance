@@ -22,7 +22,7 @@ def index():
   return index_controller.getIndexPage()
 
 
-@app.route('/signup', methods=['GET', 'POST'])
+@app.route('/sign-up', methods=['GET', 'POST'])
 @decorators.unprotected_route
 def signup():
   if request.method == 'POST':
