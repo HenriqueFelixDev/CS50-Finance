@@ -1,8 +1,11 @@
 class User:
-  def __init__(self, id, name, email):
+  def __init__(self, id, name, email, password_hash, funds, created_at):
     self.id = id
     self.name = name
     self.email = email
+    self.password_hash = password_hash
+    self.funds = funds
+    self.created_at = created_at
 
 
 class UserCreateDTO:
