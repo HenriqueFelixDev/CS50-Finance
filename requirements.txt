@@ -1,0 +1,6 @@
+Flask
+bcrypt
+cuid2
+wtforms
+email_validator
+Flask-Session2

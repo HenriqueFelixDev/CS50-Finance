@@ -1,0 +1,110 @@
+{% extends "layouts/default.html" %}
+
+{%block head %}
+<link rel="stylesheet" href="/static/styles/pages/signup.css" type="text/css" />
+{% endblock %}
+
+{% block body %}
+
+<form action="/signup" method="POST" class="uk-padding">
+  <div class="uk-text-center">
+    <h1 class="logo">CS50<span class="logo__trailing">.Finance</span></h1>
+    <h2 class="uk-h4">Create an account</h2>
+  </div>
+
+  {% with errors = get_flashed_messages(category_filter=['error']) %}
+    {% if errors %}
+      <div class="uk-alert-danger" uk-alert>
+        <ul class="uk-margin-remove uk-list">
+          {% for error in errors %}
+            <li>{{ error }}</li>
+          {% endfor %}
+        </ul>
+        <a href="javascript:void(0);" class="uk-alert-close" uk-close></a>
+      </div>
+    {% endif %}
+  {% endwith %}
+  
+  <div class="uk-flex uk-flex-column">
+    <label class="uk-margin-small">
+      <span class="uk-form-label">Name</span>
+      <input
+        class="uk-input"
+        autofocus
+        type="text"
+        name="name"
+        required
+        maxlength="64"
+        placeholder="i.e. John"
+        value="{{form.name.data}}"
+      />
+
+      {% if 'name' in form.errors %}
+        <small class="uk-text-danger">
+          {{form.errors['name'][0]}}
+        </small>
+      {% endif %}
+    </label>
+  
+    <label class="uk-margin-small">
+      <span class="uk-form-label">E-mail</span>
+      <input
+        class="uk-input"
+        type="email"
+        name="email"
+        required
+        minlength="3"
+        maxlength="64"
+        placeholder="i.e. john@mail.com"
+        value="{{form.email.data}}"
+      />
+      {% if 'email' in form.errors %}
+        <small class="uk-text-danger">
+          {{form.errors['email'][0]}}
+        </small>
+      {% endif %}
+    </label>
+  
+    <label class="uk-margin-small">
+      <span class="uk-form-label">Password</span>
+      <input
+        class="uk-input"
+        type="password"
+        name="password"
+        required
+        maxlength="32"
+      />
+      
+      {% if 'password' in form.errors %}
+        <small class="uk-text-danger">
+          {{form.errors['password'][0]}}
+        </small>
+      {% endif %}
+    </label>
+  
+    <label class="uk-margin-small">
+      <span class="uk-form-label">Confirm your password</span>
+      <input
+        class="uk-input"
+        type="password"
+        name="confirm_password"
+        required
+        maxlength="32"
+      />
+      
+      {% if 'confirm_password' in form.errors %}
+        <small class="uk-text-danger">
+          {{form.errors['confirm_password'][0]}}
+        </small>
+      {% endif %}
+    </label>
+  
+    <input class="uk-button uk-button-primary" type="submit" value="Sign Up" />
+  </div>
+
+  <p class="uk-text-center">
+    Are you have an account? <a href="/signin">Sign in here</a>
+  </p>
+</form>
+
+{% endblock %}
