@@ -1,6 +1,6 @@
 from flask import Flask, request, render_template
 from flask_session import Session
-import core.filters as filters
+from core import filters, decorators
 from controllers import auth_controller, index_controller
 
 app = Flask(__name__)
@@ -17,11 +17,22 @@ Session(app)
 
 
 @app.route('/', methods=['GET'])
+@decorators.login_required
 def index():
   return index_controller.getIndexPage()
 
 
-@app.route('/signup', methods=['GET', 'POST'])
+@app.route('/sign-in', methods=['GET', 'POST'])
+@decorators.unprotected_route
+def signIn():
+  if request.method == 'POST':
+    return auth_controller.signIn()
+  
+  return auth_controller.getSignInPage()
+
+
+@app.route('/sign-up', methods=['GET', 'POST'])
+@decorators.unprotected_route
 def signup():
   if request.method == 'POST':
     return auth_controller.signUp()
