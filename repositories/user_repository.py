@@ -3,6 +3,10 @@ import database.dbconnection as dbconnection
 from entities.user import UserCreateDTO
 
 def createUser(user: UserCreateDTO):
+  '''
+  Cadastra um novo usuário no banco de dados.
+  :param user: Usuário a ser cadastrado
+  '''
   with dbconnection.connect() as con:
     try:
       id = con.execute(
