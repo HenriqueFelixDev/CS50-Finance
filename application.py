@@ -29,5 +29,10 @@ def signup():
   return auth_controller.getSignUpPage()
 
 
+@app.route('/sign-out', methods=['POST'])
+def signOut():
+  return auth_controller.signOut()
+
+
 if __name__ == '__main__':
   app.run()

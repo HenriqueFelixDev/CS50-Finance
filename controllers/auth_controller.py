@@ -57,6 +57,15 @@ def signUp():
     return getSignUpPage()
 
 
+def signOut():
+  '''
+  Desloga o usuário do sistema
+  '''
+  session.clear()
+
+  return redirect('/sign-in')
+
+
 def getSignUpPage():
   '''
   Exibe a tela de cadastro.
