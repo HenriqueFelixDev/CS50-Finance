@@ -9,14 +9,14 @@
     <thead>
       <tr>
         <th>Action</th>
-        <th>Shares</th>
+        <th class="uk-text-center">Shares</th>
         <th>Price</th>
         <th>Total</th>
         <th aria-label="actions"></th>
       </tr>
     </thead>
     <tbody>
-      {% for i in range(4) %}
+      {% for action in actions %}
       <tr>
         <td>
           <div class="uk-flex uk-flex-middle">
@@ -30,25 +30,25 @@
 
             <div>
               <p class="uk-text-large uk-text-bold uk-margin-remove">
-                AAPL
+                {{ action.symbol }}
               </p>
               <p class="uk-text-small uk-text-muted uk-margin-remove">
-                Apple Inc.
+                {{ action.name }}
               </p>
             </div>
           </div>
         </td>
 
         <td class="uk-text-center">
-          5
+          {{ action.shares }}
         </td>
 
         <td>
-          $160.00
+          {{ action.price | usd }}
         </td>
 
         <td class="uk-text-bold">
-          $1600.00
+          {{ action.total | usd }}
         </td>
         
         <td>

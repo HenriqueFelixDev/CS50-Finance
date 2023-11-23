@@ -4,3 +4,4 @@ cuid2
 wtforms
 email_validator
 Flask-Session2
+python-dotenv

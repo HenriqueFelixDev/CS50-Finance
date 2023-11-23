@@ -14,9 +14,12 @@ CREATE TABLE IF NOT EXISTS transactions (
 	name TEXT NOT NULL,
 	shares INTEGER NOT NULL,
 	price DECIMAL NOT NULL,
-	datetime TEXT NOT NULL,
+	datetime TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
 	operation TEXT NOT NULL,
-	PRIMARY KEY(id)
+	user_id TEXT NOT NULL,
+	PRIMARY KEY(id),
+	FOREIGN KEY(user_id) REFERENCES users(id)
 );
 
 CREATE INDEX IF NOT EXISTS email_index ON users(email);
+CREATE INDEX IF NOT EXISTS symbol_index ON transactions(symbol);
