@@ -9,4 +9,12 @@ def getStockPrices(symbols: list[str]):
   
   response = urllib.request.urlopen(url)
   return json.loads(response.read())
+
+
+def getStockQuotes(symbol: str):
+  token = os.getenv('IEX_API_KEY')
+  url = f'https://api.iex.cloud/v1/data/core/quote/{symbol}?token={token}'
+
+  response = urllib.request.urlopen(url)
+  return json.loads(response.read())
   

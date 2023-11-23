@@ -1,4 +1,4 @@
-from flask import Flask, request, render_template
+from flask import Flask, request
 from flask_session import Session
 from core import filters, decorators
 from controllers import auth_controller, history_controller, index_controller, quote_controller
@@ -56,8 +56,11 @@ def signOut():
   return auth_controller.signOut()
 
 
-@app.route('/quotes', methods=['GET'])
+@app.route('/quotes', methods=['GET', 'POST'])
 def quotes():
+  if request.method == 'POST':
+    return quote_controller.getQuotes()
+  
   return quote_controller.getQuotesPage()
 
 
