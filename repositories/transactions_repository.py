@@ -9,7 +9,6 @@ def getActiveActions(userId: str) -> list[Action]:
     result = con.execute(
       '''
       SELECT
-        id,
         symbol,
         name,
         SUM(
@@ -19,18 +18,17 @@ def getActiveActions(userId: str) -> list[Action]:
           END
         ) as total_shares
       FROM transactions
-      WHERE user_id = :user_id
+      WHERE user_id = ?
       GROUP BY symbol
       HAVING total_shares > 0;
       ''',
-      {'user_id': userId}
+      (userId,),
     )
 
     items = []
 
     for row in result.fetchall():
       action = Action(
-        id=row['id'],
         symbol=row['symbol'],
         name=row['name'],
         shares=row['total_shares'],

@@ -1,6 +1,5 @@
 class Action:
-  def __init__(self, id, symbol, name, shares, price):
-    self.id = id
+  def __init__(self, symbol, name, shares, price):
     self.symbol = symbol
     self.name = name
     self.shares = shares
