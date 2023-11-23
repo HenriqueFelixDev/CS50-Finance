@@ -7,7 +7,7 @@
     color: $global-muted-color;
   }
 
-  &:not(.logo--inverse) .logo__trailing {
+  .logo__trailing {
     font-weight: normal;
     text-transform: capitalize;
   }
