@@ -1,10 +1,7 @@
-{% extends "layouts/default.html" %}
+{% extends "layouts/dashboard.html" %}
 
-{% block body %}
+{% block content %}
 
 <h1>Hello, {{ session['name'] }}</h1>
-<form action="/sign-out" method="POST">
-  <button>Sair</button>
-</form>
 
 {% endblock %}

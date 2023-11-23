@@ -1,0 +1,81 @@
+{% extends "layouts/default.html" %}
+
+{% block head %}
+<link rel="stylesheet" href="/static/styles/pages/dashboard.css" type="text/css" />
+{% endblock %}
+
+{% block body %}
+
+<div class="uk-flex uk-flex-column uk-height-1-1">
+  <header class="header">
+    <div class="logo logo--inverse uk-h4 uk-margin-remove">
+      CS50<span class="logo__trailing">.Finance</span>
+    </div>
+
+    <button
+      class="uk-button uk-button-link"
+      id="menu-toggle-button"
+      aria-label="toggle menu"
+    >
+      <span uk-icon="icon: menu; ratio: 1.5;"></span>
+    </button>
+  </header>
+
+  <div class="uk-flex uk-height-1-1">
+    <nav class="sidemenu">
+      <ul class="sidemenu__list">
+        <li class="sidemenu__item">
+          <div class="logo logo--inverse uk-h4 uk-text-center">
+            CS50<span class="logo__trailing">.Finance</span>
+          </div>
+        </li>
+
+        <li class="sidemenu__item {{ request.path == '/' and 'sidemenu__item--active'}}">
+          <a href="/" class="sidemenu__link">
+            <span class="uk-margin-small-right" uk-icon="thumbnails"></span>
+            Overview
+          </a>
+        </li>
+
+        <li class="sidemenu__item {{ request.path == '/quotes' and 'sidemenu__item--active'}}">
+          <a href="/quotes" class="sidemenu__link">
+            <span class="uk-margin-small-right" uk-icon="album"></span>
+            Quotes
+          </a>
+        </li>
+
+        <li class="sidemenu__item {{ request.path == '/history' and 'sidemenu__item--active'}}">
+          <a href="/history" class="sidemenu__link">
+            <span class="uk-margin-small-right" uk-icon="expand"></span>
+            History
+          </a>
+        </li>
+
+        <hr class="sidemenu__divider" />
+
+        <li class="sidemenu__item sidemenu__item--secondary">
+          <form action="/sign-out" method="POST">
+            <button type="submit" class="sidemenu__link">
+              <span class="uk-margin-small-right" uk-icon="sign-out"></span>
+              Logout
+            </button>
+          </form>
+        </li>
+      </ul>
+    </nav>
+  
+    <main class="uk-flex-1">
+      {% block content %}{% endblock %}
+    </main>
+  </div>
+</div>
+
+<script>
+  const toggleMenuButtonEl = document.getElementById('menu-toggle-button');
+  const sidemenuEl = document.querySelector('.sidemenu');
+
+  toggleMenuButtonEl.addEventListener('click', () => {
+    sidemenuEl.classList.toggle('sidemenu--visible')
+  });
+</script>
+{% endblock %}
