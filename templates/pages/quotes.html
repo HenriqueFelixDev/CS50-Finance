@@ -1,0 +1,100 @@
+{% extends "layouts/dashboard.html" %}
+
+{% block content %}
+
+<h1 class="uk-h4 uk-text-normal uk-text-muted">Search Quote</h1>
+
+<form action="" method="POST" class="uk-form-stacked">
+  <label>
+    <span class="uk-display-block">Symbol</span>
+
+    <div class="uk-inline">
+      <input
+        class="uk-input"
+        type="search"
+        placeholder="i.e. AAPL"
+        name="symbol"
+      />
+
+      <button
+        class="uk-form-icon uk-form-icon-flip"
+        uk-icon="search"
+        aria-label="search quote"
+      ></button>
+    </div>
+  </label>
+</form>
+
+{% for quote in quotes %}
+
+<article class="uk-margin-top uk-card uk-card-default uk-padding-small uk-width-1-2@m">
+  <header class="uk-flex uk-flex-between uk-flex-middle">
+    <h2 class="uk-text-primary">
+      {{ quote['symbol'] }}
+    </h2>
+    <p class="uk-margin-remove-top">
+      {{ quote['companyName'] }}
+    </p>
+  </header>
+
+  <section>
+    <h3 class="uk-text-meta uk-text-normal uk-margin-remove">
+      Price
+    </h3>
+    
+    <p class="uk-margin-remove uk-h3">
+      {{ quote['iexRealtimePrice'] | usd }}
+    </p>
+  </section>
+
+  {% set change_positive = quote['change'] >= 0 %}
+
+  <section class="{{ 'uk-text-success' if change_positive else 'uk-text-danger' }}">
+    {% if change_positive %}
+      <svg width="20" height="14" viewBox="0 0 20 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M1.5 13.5L7.5 7.5L11.5 11.5L20 1.92L18.59 0.5L11.5 8.5L7.5 4.5L0 12L1.5 13.5Z" fill="currentColor"/>
+      </svg>
+    {% else %}
+      <svg width="20" height="13" viewBox="0 0 20 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M18.5 13L12.5 7L8.5 11L0 1.42L1.41 0L8.5 8L12.5 4L20 11.5L18.5 13Z" fill="currentColor"/>
+      </svg>
+    {% endif %}
+
+    <span>
+      {{ '+' if change_positive else '-' }} {{ quote['change'] | usd }}
+    </span>
+  </section>
+
+  <section class="uk-margin-top">
+    <h3 class="uk-text-meta uk-text-normal uk-margin-remove">
+      High/Low
+    </h3>
+
+    <div class="uk-margin-small">
+      <p class="uk-text-success uk-margin-remove">
+        <i uk-icon="arrow-up"></i>
+        <span>{{ quote['high'] or 0.0 | usd }}</span>
+      </p>
+      <p class="uk-text-danger uk-margin-remove">
+        <i uk-icon="arrow-down"></i>
+        <span>{{ quote['low'] or 0.0 | usd }}</span>
+      </p>
+    </div>
+  </section>
+
+  <footer class="uk-margin-top">
+    <p class="uk-text-meta">
+      Note: The update of high and low price values may experience a delay of 15 minutes.
+    </p>
+
+    <div class="uk-text-right">
+      <button type="button" class="uk-button uk-button-primary">
+        Buy
+      </button>
+    </div>
+  </footer>
+</article>
+
+{% endfor %}
+
+{% endblock %}
