@@ -1,10 +1,11 @@
 // Custom Styles
 @import "reset.scss";
 @import "variables-theme.scss";
-@import "components.scss";
 
 
 // UIKit Styles
 @import "../scss/variables-theme.scss";
 @import "../scss/mixins-theme.scss";
 @import "../scss/uikit-theme.scss";
+
+@import "components.scss";

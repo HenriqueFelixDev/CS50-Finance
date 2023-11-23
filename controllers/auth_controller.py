@@ -50,6 +50,7 @@ def signUp():
     session['id'] = user.id
     session['name'] = user.name
     session['email'] = user.email
+    session['funds'] = 10000
     
     return redirect('/')
   except Exception as error:
@@ -102,6 +103,7 @@ def signIn():
     session['id'] = user.id
     session['name'] = user.name
     session['email'] = user.email
+    session['funds'] = user.funds
 
     if 'next' in request.args:
       route = request.args['next']
