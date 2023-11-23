@@ -65,6 +65,26 @@
     </nav>
   
     <main class="uk-flex-1">
+      <header class="uk-padding-small uk-padding-remove-bottom">
+        <p class="uk-margin-remove ">
+          <span class="uk-text-emphasis uk-text-middle">
+            Hello, {{ session['name'] }}
+          </span>
+
+          <i uk-icon="icon: chevron-double-right; ratio: 1.5;"></i>
+
+          <span class="uk-text-middle">
+            {{ current_date | date }}
+          </span>
+        </p>
+
+        <p class="uk-margin-remove uk-text-emphasis uk-text-bold uk-text-large">
+          {{ session['funds'] | usd }}
+        </p>
+      </header>
+
+      <hr class="uk-margin-small" />
+
       {% block content %}{% endblock %}
     </main>
   </div>

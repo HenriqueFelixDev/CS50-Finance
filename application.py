@@ -2,8 +2,16 @@ from flask import Flask, request, render_template
 from flask_session import Session
 from core import filters, decorators
 from controllers import auth_controller, index_controller
+import datetime
 
 app = Flask(__name__)
+
+# Injeta globalmente a variável current_date para que seja acessível de todos
+# os templates
+@app.context_processor
+def inject_globals():
+    return { 'current_date': datetime.datetime.now() }
+
 
 # Define jinja custom filters
 app.jinja_env.filters['usd'] = filters.usd
