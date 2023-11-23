@@ -1,0 +1,46 @@
+{% extends "layouts/dashboard.html" %}
+
+{% block content %}
+
+<h1 class="uk-h4 uk-text-normal uk-text-muted">Transactions</h1>
+
+<section class="uk-grid uk-margin-remove uk-padding-small uk-box-shadow-small uk-background-default" style="gap: 2rem 4rem;">
+  {% for transaction in transactions %}
+  <article class="uk-flex uk-flex-middle">
+    <div class="uk-background-muted uk-border-rounded uk-padding-small uk-margin-small-right">
+      {% if transaction.operation == 'buy' %}
+        <i
+          class="uk-block uk-text-success"
+          uk-icon="icon: arrow-up; ratio: 2;"
+          style="width: 32px; height: 32px;"
+        ></i>
+      {% else %}
+        <i
+          class="uk-block uk-text-danger"
+          uk-icon="icon: arrow-down; ratio: 2;"
+          style="width: 32px; height: 32px;"
+        ></i>
+      {% endif %}
+    </div>
+
+    <div>
+      <p class="uk-margin-remove uk-text-bold uk-text-small uk-text-muted">
+        {{ transaction.symbol }}
+      </p>
+
+      <p class="uk-margin-remove uk-text-small">
+        {{ transaction.shares }} x
+        <span class="uk-text-large uk-text-bold uk-text-secondary">
+          {{ transaction.price | usd }}
+        </span>
+      </p>
+
+      <p class="uk-margin-remove uk-text-muted">
+        {{ transaction.datetime | datetime }}
+      </p>
+    </div>
+  </article>
+  {% endfor %}
+</section>
+
+{% endblock %}

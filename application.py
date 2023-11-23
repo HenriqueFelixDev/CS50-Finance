@@ -1,10 +1,13 @@
 from flask import Flask, request, render_template
 from flask_session import Session
 from core import filters, decorators
-from controllers import auth_controller, index_controller
+from controllers import auth_controller, history_controller, index_controller
 import datetime
+from dotenv import load_dotenv
 
 app = Flask(__name__)
+
+load_dotenv()
 
 # Injeta globalmente a variável current_date para que seja acessível de todos
 # os templates
@@ -51,6 +54,11 @@ def signup():
 @app.route('/sign-out', methods=['POST'])
 def signOut():
   return auth_controller.signOut()
+
+
+@app.route('/history', methods=['GET'])
+def history():
+  return history_controller.getHistoryPage()
 
 
 if __name__ == '__main__':
