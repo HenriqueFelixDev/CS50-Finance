@@ -3,8 +3,9 @@ $primary-color: #299D91;
 $global-primary-background: $primary-color;
 $global-link-color: $primary-color;
 $global-link-hover-color: $primary-color;
+$global-muted-background: #f0f0f0;
 
 $global-font-family: -apple-system, BlinkMacSystemFont, "Poppins", "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji" !default;
-$base-heading-font-weight: bold !default;
-$global-2xlarge-font-size: 2rem !default;
-$global-xlarge-font-size: 1.7rem !default;
+$base-heading-font-weight: bold;
+$global-2xlarge-font-size: 2rem;
+$global-xlarge-font-size: 1.7rem;

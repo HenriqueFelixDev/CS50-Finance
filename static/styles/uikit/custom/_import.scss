@@ -6,6 +6,7 @@
 // UIKit Styles
 @import "../scss/variables-theme.scss";
 @import "../scss/mixins-theme.scss";
-@import "../scss/uikit-theme.scss";
+@import "../scss/components/_import.scss";
+@import "../scss/theme/import";
 
 @import "components.scss";

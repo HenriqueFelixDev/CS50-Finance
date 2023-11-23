@@ -2,6 +2,64 @@
 
 {% block content %}
 
-<h1>Hello, {{ session['name'] }}</h1>
+<h1 class="uk-h4 uk-text-normal uk-text-muted">Actions</h1>
+
+<div class="responsive-table">
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Action</th>
+        <th>Shares</th>
+        <th>Price</th>
+        <th>Total</th>
+        <th aria-label="actions"></th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for i in range(4) %}
+      <tr>
+        <td>
+          <div class="uk-flex uk-flex-middle">
+            <div class="uk-background-muted uk-border-rounded uk-padding-small uk-margin-small-right">
+              <i
+                class="uk-block"
+                uk-icon="icon: credit-card; ratio: 1.5;"
+                style="width: 24px; height: 24px;"
+              ></i>
+            </div>
+
+            <div>
+              <p class="uk-text-large uk-text-bold uk-margin-remove">
+                AAPL
+              </p>
+              <p class="uk-text-small uk-text-muted uk-margin-remove">
+                Apple Inc.
+              </p>
+            </div>
+          </div>
+        </td>
+
+        <td class="uk-text-center">
+          5
+        </td>
+
+        <td>
+          $160.00
+        </td>
+
+        <td class="uk-text-bold">
+          $1600.00
+        </td>
+        
+        <td>
+          <button class="uk-button uk-button-primary-outlined">
+            Sell
+          </button>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
 
 {% endblock %}
