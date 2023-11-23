@@ -1,4 +1,6 @@
-from flask import render_template
+from flask import render_template, session
+from repositories import transactions_repository
 
 def getHistoryPage():
-  return render_template('pages/history.html')
+  transactions = transactions_repository.getAllTransactions(userId=session['id'])
+  return render_template('pages/history.html', transactions=transactions)
