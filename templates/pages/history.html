@@ -1,0 +1,38 @@
+{% extends "layouts/dashboard.html" %}
+
+{% block content %}
+
+<h1 class="uk-h4 uk-text-normal uk-text-muted">History</h1>
+
+<section class="uk-grid uk-margin-remove uk-padding-small uk-box-shadow-small uk-background-default" style="gap: 2rem 4rem;">
+  {% for i in range(8) %}
+  <article class="uk-flex uk-flex-middle">
+    <div class="uk-background-muted uk-border-rounded uk-padding-small uk-margin-small-right">
+      <i
+        class="uk-block uk-text-success"
+        uk-icon="icon: arrow-up; ratio: 2;"
+        style="width: 32px; height: 32px;"
+      ></i>
+    </div>
+
+    <div>
+      <p class="uk-margin-remove uk-text-bold uk-text-small uk-text-muted">
+        AAPL
+      </p>
+
+      <p class="uk-margin-remove uk-text-small">
+        5 x
+        <span class="uk-text-large uk-text-bold uk-text-secondary">
+          $18000,00
+        </span>
+      </p>
+
+      <p class="uk-margin-remove uk-text-muted">
+        May 19, 2023 10:15
+      </p>
+    </div>
+  </article>
+  {% endfor %}
+</section>
+
+{% endblock %}
