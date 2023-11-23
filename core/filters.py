@@ -5,7 +5,7 @@ def usd(value: float):
   Formata o :attr:`value` de acordo com a representação do dólar 
   com 2 casas decimais
   """
-  return f'$ {value:.2f}'
+  return f'$ {value:,.2f}'
 
 
 def date(date: datetime):
