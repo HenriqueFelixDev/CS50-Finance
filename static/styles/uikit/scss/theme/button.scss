@@ -16,10 +16,28 @@
 // New
 //
 
+/* Primary Button Outlined*/
+.uk-button-primary-outlined {
+  background-color: transparent;
+  color: $button-primary-background;
+  @if(mixin-exists(hook-button-primary)) {@include hook-button-primary();}
+  border-color: $button-primary-background;
 
+  /* Hover */
+  &:hover {
+    background-color: $button-primary-hover-background;
+    color: $button-primary-hover-color;
+    @if(mixin-exists(hook-button-primary-hover)) {@include hook-button-primary-hover();}
+  }
 
-
-
+  /* OnClick + Active */
+  &:active,
+  &.uk-active {
+    background-color: $button-primary-active-background;
+    color: $button-primary-active-color;
+    @if(mixin-exists(hook-button-primary-active)) {@include hook-button-primary-active();}
+  }
+}
 
 
 // Component
