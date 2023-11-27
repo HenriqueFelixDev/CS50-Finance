@@ -20,7 +20,7 @@ class ActionCreateDTO:
     self.userId = userId
   
   @property
-  def fundsDiscount(self):
+  def totalSharePrice(self):
     return self.shares * self.price
 
 

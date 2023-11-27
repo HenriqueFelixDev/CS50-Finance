@@ -35,8 +35,14 @@ def index():
 
 @app.route('/actions/buy', methods=['POST'])
 @decorators.login_required
-def actions():
+def actionsBuy():
   return index_controller.buyAction()
+
+
+@app.route('/actions/sell', methods=['POST'])
+@decorators.login_required
+def actionsSell():
+  return index_controller.sellAction()
 
 
 @app.route('/sign-in', methods=['GET', 'POST'])
