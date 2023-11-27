@@ -40,7 +40,7 @@ def buyAction():
 
   newFunds = session['funds'] - action.totalSharePrice
 
-  if newFunds <= 0:
+  if newFunds < 0:
     error = { 'code': 400, 'error': 'insufficient funds'}
     return jsonify(error), 400
   
