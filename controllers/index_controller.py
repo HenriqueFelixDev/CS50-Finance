@@ -38,7 +38,7 @@ def buyAction():
 
   action = getRealtimeAction(symbol, shares)
 
-  newFunds = session['funds'] - action.fundsDiscount
+  newFunds = session['funds'] - action.totalSharePrice
 
   if newFunds <= 0:
     error = { 'code': 400, 'error': 'insufficient funds'}
@@ -80,7 +80,7 @@ def sellAction():
   # Cadastra a transação e atualiza o saldo do usuário
   transactions_repository.sellAction(action)
   
-  session['funds'] = session['funds'] + action.fundsDiscount
+  session['funds'] = session['funds'] + action.totalSharePrice
 
   return jsonify({ 'result': 'ok' }), 200
 

@@ -16,7 +16,7 @@ def buyAction(action: ActionCreateDTO):
       cursor.execute(
         'UPDATE users SET funds = funds - ? WHERE id = ?;',
         (
-          action.fundsDiscount,
+          action.totalSharePrice,
           action.userId,
         ),
       )
@@ -53,7 +53,7 @@ def sellAction(action: ActionCreateDTO):
       cursor.execute(
         'UPDATE users SET funds = funds + ? WHERE id = ?;',
         (
-          action.fundsDiscount,
+          action.totalSharePrice,
           action.userId,
         ),
       )
