@@ -10,6 +10,20 @@ class Action:
     return self.price * self.shares
 
 
+class ActionCreateDTO:
+  def __init__(self, id, symbol, name, shares, price, userId):
+    self.id = id
+    self.symbol = symbol
+    self.name = name
+    self.shares = shares
+    self.price = price
+    self.userId = userId
+  
+  @property
+  def fundsDiscount(self):
+    return self.shares * self.price
+
+
 class Transaction:
   def __init__(self, id, symbol, name, shares, price, datetime, operation):
     self.id = id
