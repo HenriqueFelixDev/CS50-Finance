@@ -1,7 +1,44 @@
 import sqlite3
 from database import dbconnection
-from entities.transaction import Action, Transaction
+from entities.transaction import Action, ActionCreateDTO, Transaction
 from datetime import datetime
+
+def buyAction(action: ActionCreateDTO):
+  with dbconnection.connect() as con:
+    con.row_factory = sqlite3.Row
+
+    con.isolation_level = None
+    cursor = con.cursor()
+
+    cursor.execute('begin')
+
+    try:
+      cursor.execute(
+        'UPDATE users SET funds = funds - ? WHERE id = ?;',
+        (
+          action.fundsDiscount,
+          action.userId,
+        ),
+      )
+
+      cursor.execute(
+        '''
+        INSERT INTO transactions (id, symbol, name, shares, price, user_id, operation)
+        VALUES (?, ?, ?, ?, ?, ?, 'buy');
+        ''',
+        (
+          action.id,
+          action.symbol,
+          action.name,
+          action.shares,
+          action.price,
+          action.userId,
+        ),
+      )
+      cursor.execute('commit')
+    except:
+      cursor.execute('rollback')
+    
 
 def getActiveActions(userId: str) -> list[Action]:
   with dbconnection.connect() as con:

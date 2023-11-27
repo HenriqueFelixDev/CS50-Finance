@@ -33,6 +33,12 @@ def index():
   return index_controller.getIndexPage()
 
 
+@app.route('/actions/buy', methods=['POST'])
+@decorators.login_required
+def actions():
+  return index_controller.buyAction()
+
+
 @app.route('/sign-in', methods=['GET', 'POST'])
 @decorators.unprotected_route
 def signIn():

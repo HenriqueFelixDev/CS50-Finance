@@ -2,6 +2,14 @@
 
 {% block content %}
 
+<button
+  class="uk-button uk-button-primary"
+  uk-toggle="target: #buy-action-modal"
+  type="button"
+>
+  Buy Action
+</button>
+
 <h1 class="uk-h4 uk-text-normal uk-text-muted">Actions</h1>
 
 <div class="responsive-table">
@@ -61,5 +69,88 @@
     </tbody>
   </table>
 </div>
+
+<div id="buy-action-modal" uk-modal>
+    <div class="uk-modal-dialog uk-margin-auto-vertical uk-modal-body form-small">
+      <button class="uk-modal-close-default" type="button" uk-close></button>
+
+      <h2 class="uk-modal-title">Buy action</h2>
+
+      <div id="buy-action-alert" class="uk-alert-danger uk-hidden" uk-alert></div>
+
+      <form id="buy-action-form">
+        <label class="uk-display-block">
+          <span class="uk-form-label">Symbol</span>
+          <input
+            type="text"
+            required
+            name="symbol"
+            placeholder="i.e. MSFT"
+            class="uk-input"
+          />
+        </label>
+
+        <label class="uk-display-block uk-margin">
+          <span class="uk-form-label">Shares</span>
+          <input
+            type="number"
+            min="1"
+            name="shares"
+            placeholder="i.e. 5"
+            class="uk-input"
+          />
+        </label>
+
+        <button
+          id="buy-button"
+          type="submit"
+          class="uk-button uk-button-primary uk-width-1-1"
+        >
+          <div class="uk-margin-right-small uk-hidden" uk-spinner="ratio: 0.75;"></div>
+          <span>Buy</span>
+        </button>
+      </form>
+    </div>
+</div>
+
+<script>
+  const buyActionFormEl = document.getElementById('buy-action-form');
+  const buyButtonEl = document.getElementById('buy-button');
+  const buySpinnerEl = document.querySelector('#buy-action-form [uk-spinner]');
+  const buyActionAlertEl = document.getElementById('buy-action-alert');
+
+  buyActionFormEl.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    const {
+      symbol: { value: symbol },
+      shares : { value: shares }
+    } = buyActionFormEl;
+
+    buyButtonEl.setAttribute('disabled', 'disabled')
+    buySpinnerEl.classList.remove('uk-hidden');
+    
+    const result = await fetch('/actions/buy', {
+      method: 'post',
+      body: new FormData(buyActionFormEl)
+    });
+    
+    
+    if (result.ok) {
+      location.reload();
+      return;
+    }
+    
+    const {
+      error = 'unexpected error',
+    } = await result.json().catch(() => ({}));
+
+    buyButtonEl.removeAttribute('disabled');
+    buySpinnerEl.classList.add('uk-hidden');
+
+    buyActionAlertEl.textContent = error;
+    buyActionAlertEl.classList.remove('uk-hidden');
+  });
+</script>
 
 {% endblock %}
